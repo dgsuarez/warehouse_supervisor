@@ -3,9 +3,9 @@ module WarehouseSupervisor
 
     attr_reader :options, :programs
 
-    def self.parse(&block)
+    def self.parse(str)
       instance = self.new
-      instance.instance_eval(&block)
+      instance.instance_eval(str)
       instance
     end
 
