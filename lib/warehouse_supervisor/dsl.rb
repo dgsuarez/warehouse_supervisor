@@ -1,7 +1,7 @@
 module WarehouseSupervisor
   class DSL
 
-    attr_reader :options
+    attr_reader :options, :programs
 
     def self.parse(&block)
       instance = self.new
@@ -11,16 +11,26 @@ module WarehouseSupervisor
 
     def initialize
       @options = {}
+      @programs = {}
+    end
+
+
+    def define_program(name, *args, &block)
+      define_for(@programs, name, *args, &block)
     end
 
     def define_options(name, *args, &block)
-      @options[name] = {}
+      define_for(@options, name, *args, &block)
+    end
+
+    def define_for(hash,name,*args,&block)
+      hash[name] = {}
       if args[0] && args[0].kind_of?(Hash)
-        @options[name].merge!(args[0])
+        hash[name].merge!(args[0])
       end
       if block_given?
         bp = BlockParser.new(block)
-        @options[name].merge!(bp.get_result)
+        hash[name].merge!(bp.get_result)
       end
     end
 

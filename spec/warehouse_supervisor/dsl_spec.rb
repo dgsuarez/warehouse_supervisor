@@ -31,6 +31,26 @@ describe WarehouseSupervisor::DSL do
     parsed.options.should eql({
       :my_options => {:user => "me"} 
     })
+  end
+
+  it "should understand program definitions" do
+    parsed = WarehouseSupervisor::DSL.parse do
+      define_program :prog1 do |prog|
+        prog[:command] = "ls"
+      end
+
+      define_program :prog2, :command => "ls"
+
+      define_program :prog3 do |prog|
+        prog.command = "ls"
+      end
+    end
+    res = {:command => "ls"}
+    parsed.programs.should eql({
+      :prog1 => res,
+      :prog2 => res,
+      :prog3 => res
+    })
 
   end
 
