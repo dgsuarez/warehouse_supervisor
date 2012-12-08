@@ -17,8 +17,11 @@ define_program :resque_worker do |program|
   program.command = "bundle exec rake resque:work"
 end
 
-with_options :production do |out| 
+define_group :main, :with_options => :production do |out| 
   out.program :resque_worker, :num_procs => 3
-  out.program :resque_web
   out.program :resque_scheduler
+end
+
+define_group :web, :with_options => :production do |out|
+  out.program :resque_web
 end

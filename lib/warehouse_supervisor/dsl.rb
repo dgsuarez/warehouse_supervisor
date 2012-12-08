@@ -1,26 +1,24 @@
 module WarehouseSupervisor
   class DSL
 
-    attr_reader :options, :programs
+    attr_reader :model
 
     def self.parse(str)
       instance = self.new
       instance.instance_eval(str)
-      instance
+      instance.model
     end
 
     def initialize
-      @options = {}
-      @programs = {}
+      @model = Model.new
     end
 
-
     def define_program(name, *args, &block)
-      define_for(@programs, name, *args, &block)
+      define_for(@model.programs, name, *args, &block)
     end
 
     def define_options(name, *args, &block)
-      define_for(@options, name, *args, &block)
+      define_for(@model.options, name, *args, &block)
     end
 
     def define_for(hash,name,*args,&block)
@@ -43,7 +41,7 @@ module WarehouseSupervisor
     end
 
     def get_result
-      self.instance_eval &@block  
+      self.instance_eval(&@block)
       @result
     end
 
