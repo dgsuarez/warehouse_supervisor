@@ -4,9 +4,19 @@ module WarehouseSupervisor
     def initialize(model)
       @model = model
     end
+
+    def output
+      if @model.options.length > 1
+        raise RuntimeError.new("More than 1 set of options")
+      end
+      output_with_options(@model.programs, @model.options.values.first)
+    end
     
     def output_with_options(programs, options)
-       programs.map {|name, opts| output_program(name, options.merge(opts))}.join
+      o = programs.map do |name, opts|
+        output_program(name, (options || {}).merge(opts))
+      end
+       o.join
     end
 
     def output_program(prog_name, opts)

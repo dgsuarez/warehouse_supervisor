@@ -61,6 +61,36 @@ describe WarehouseSupervisor::Outputter do
       out = o.output_with_options(programs, options)
       out.lines.select {|x| x =~ /user = tal/}.should have(2).elements
     end
+
+    it "should not break if no options are given" do
+      programs = {:ls => {:command => "ls"}, :cat => {:command => "cat"}}
+      o = WarehouseSupervisor::Outputter.new(nil)
+      out = o.output_with_options(programs, nil)
+      out.lines.select {|x| x =~ /command = /}.should have(2).elements
+    end
+
+  end
+
+  describe "#output" do
+    it "should output the programs with the options if no group is defined" do
+      m = WarehouseSupervisor::Model.new
+      m.options = {:opts => {:user => "tal"}}
+      m.programs = {:ls => {:command => "ls"}, :cat => {:command => "cat"}}
+      o = WarehouseSupervisor::Outputter.new(m)
+      out = o.output
+      out.should =~ /program:ls/
+      out.should =~ /program:cat/
+      out.should =~ /user = tal/
+    end
+
+    it "should break if no group is specified and there are more than 1 options group" do
+      m = WarehouseSupervisor::Model.new
+      m.options = {:opts => {:user => "tal"}, :other_opts => {:user => "cual"}}
+      m.programs = {:ls => {:command => "ls"}, :cat => {:command => "cat"}}
+      o = WarehouseSupervisor::Outputter.new(m)
+      expect {o.output}.to raise_error
+    end
+
   end
 
 end
