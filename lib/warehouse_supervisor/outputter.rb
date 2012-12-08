@@ -5,10 +5,10 @@ module WarehouseSupervisor
       @model = model
     end
 
-    def output_program(prog)
+    def output_program(name, prog)
       out = []
-      out << "[program:#{prog.keys.first}]"
-      prog.values.first.each do |name, val|
+      out << "[program:#{name}]"
+      prog.each do |name, val|
         res = "#{name} = "
         if val.kind_of? Hash
           r = []
