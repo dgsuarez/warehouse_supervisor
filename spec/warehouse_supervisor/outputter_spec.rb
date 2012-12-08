@@ -37,4 +37,30 @@ describe WarehouseSupervisor::Outputter do
     end
   end
 
+  describe "#output_with_options" do
+    it "should output each program with the given options" do
+      options = {:user => "tal", :process_name => "%(program_name)_%(process_number)"}
+      programs = {:ls => {:command => "ls"}}
+      o = WarehouseSupervisor::Outputter.new(nil)
+      o.output_with_options(programs, options).should =~ /user = tal/
+      o.output_with_options(programs, options).should =~ /process_name = /
+      o.output_with_options(programs, options).should =~ /command = ls/
+    end
+
+    it "should make the program the preferred source of options" do
+      options = {:user => "tal", :process_name => "%(program_name)_%(process_number)"}
+      programs = {:ls => {:command => "ls", :user => "cual"}}
+      o = WarehouseSupervisor::Outputter.new(nil)
+      o.output_with_options(programs, options).should =~ /user = cual/
+    end
+
+    it "should all the programs" do
+      options = {:user => "tal"}
+      programs = {:ls => {:command => "ls"}, :cat => {:command => "cat"}}
+      o = WarehouseSupervisor::Outputter.new(nil)
+      out = o.output_with_options(programs, options)
+      out.lines.select {|x| x =~ /user = tal/}.should have(2).elements
+    end
+  end
+
 end

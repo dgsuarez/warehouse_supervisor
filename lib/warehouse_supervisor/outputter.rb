@@ -4,6 +4,10 @@ module WarehouseSupervisor
     def initialize(model)
       @model = model
     end
+    
+    def output_with_options(programs, options)
+       programs.map {|name, opts| output_program(name, options.merge(opts))}.join
+    end
 
     def output_program(prog_name, opts)
       opt_list = opts.map do |name, val|
