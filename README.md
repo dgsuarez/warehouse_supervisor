@@ -1,24 +1,6 @@
 # WarehouseSupervisor
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'warehouse_supervisor'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install warehouse_supervisor
-
-## Usage
-
-TODO: Write usage instructions here
+Gem to easily create [supervisord](http://supervisord.org/) configuration files using ruby. Stay tuned for more!
 
 ## Contributing
 
