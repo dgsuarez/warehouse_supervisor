@@ -54,7 +54,16 @@ describe WarehouseSupervisor::Outputter do
       o.output_with_options(programs, options).should =~ /user = cual/
     end
 
-    it "should all the programs" do
+    it "should merge hash options" do
+      options = {:environment => {:TAL => "2"}}
+      programs = {:ls => {:command => "ls", :environment => {:CUAL => "3"}}}
+      o = WarehouseSupervisor::Outputter.new(nil)
+      o.output_with_options(programs, options).should =~ /TAL="2"/
+      o.output_with_options(programs, options).should =~ /CUAL="3"/
+
+    end
+
+    it "should output all the programs" do
       options = {:user => "tal"}
       programs = {:ls => {:command => "ls"}, :cat => {:command => "cat"}}
       o = WarehouseSupervisor::Outputter.new(nil)
