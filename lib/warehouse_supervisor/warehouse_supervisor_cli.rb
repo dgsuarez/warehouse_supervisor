@@ -29,7 +29,7 @@ module WarehouseSupervisor
         f.write generate_contents(options[:group], options[:config], erb_file)
         f.flush
         FileUtils.mkdir_p options[:log_dir]
-        command = "supervisord -c '#{f.path}' -n"
+        command = "supervisord -c '#{f.path}'"
         puts command
         exec command
       end
