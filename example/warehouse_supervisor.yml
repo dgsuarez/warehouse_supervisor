@@ -1,0 +1,31 @@
+development:
+  resque_workers:
+    template: worker
+    queues: 
+      - high
+      - medium
+      - low
+    num_procs: 1
+  resque_scheduler:
+    template: scheduler
+  resque_web:
+    template: resque_web
+    
+production:
+  high_resque_workers:
+    template: worker
+    queues: 
+     - high
+    num_procs: 2
+  all_resque_workers:
+    template: worker
+    queues: 
+     - high
+     - medium
+     - low
+  resque_scheduler:
+    template: scheduler
+  resque_web:
+    template: resque_web
+
+
