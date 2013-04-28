@@ -29,4 +29,9 @@ describe ProgramRenderer do
     pr = ProgramRenderer.new(definitions["development"], erb_content).render("resque_web")
     pr.should_not include "\n\n"
   end
+
+  it "should remove starting spaces" do
+    pr = ProgramRenderer.new(definitions["development"], erb_content).render("resque_web")
+    pr.should_not include "^\s+"
+  end
 end

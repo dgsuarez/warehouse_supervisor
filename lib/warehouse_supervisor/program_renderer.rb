@@ -11,7 +11,7 @@ module WarehouseSupervisor
 
     def render(program_name)
       program_definition = TemplateBinding.new(program_name, @definitions[program_name])
-      ERB.new(@erb_content, nil, nil, "@output").result(program_definition.get_binding).gsub(/^$\n/, "")
+      ERB.new(@erb_content, nil, nil, "@output").result(program_definition.get_binding).gsub(/^$\n/, "").gsub(/^[\s]+/, "")
     end
   end
 
