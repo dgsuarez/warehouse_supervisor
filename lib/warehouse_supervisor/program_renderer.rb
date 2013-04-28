@@ -1,5 +1,5 @@
-require 'warehouse_supervisor/template_binding'
 require 'erb'
+require 'warehouse_supervisor/template_binding'
 
 module WarehouseSupervisor
   class ProgramRenderer
@@ -11,7 +11,7 @@ module WarehouseSupervisor
 
     def render(program_name)
       program_definition = TemplateBinding.new(program_name, @definitions[program_name])
-      ERB.new(@erb_content, nil, nil, "@output").result(program_definition.get_binding)
+      ERB.new(@erb_content, nil, nil, "@output").result(program_definition.get_binding).gsub(/^$\n/, "")
     end
   end
 

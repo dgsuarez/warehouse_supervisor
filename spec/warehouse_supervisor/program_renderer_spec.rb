@@ -22,7 +22,11 @@ describe ProgramRenderer do
 
   it "should render the variables" do
     pr = ProgramRenderer.new(definitions["development"], erb_content).render("resque_web")
-    puts pr
     pr.should =~ /directory = awesome/
+  end
+
+  it "should have a pretty output" do
+    pr = ProgramRenderer.new(definitions["development"], erb_content).render("resque_web")
+    pr.should_not include "\n\n"
   end
 end
