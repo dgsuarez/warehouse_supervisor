@@ -10,6 +10,7 @@ development:
     template: scheduler
   resque_web:
     template: resque_web
+    dir: awesome
     
 production:
   high_resque_workers:
