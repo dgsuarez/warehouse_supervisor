@@ -4,9 +4,9 @@
   environment = QUEUE='<%=queues.join(",")%>',HOME='<%=home || ENV["HOME"]%>',USER=<%=user || ENV["USER"]%>, RAILS_ENV=<%=rails_env || ENV["RAILS_ENV"]%>, VERBOSE=1
   directory = <%=dir || ENV["RAILS_ROOT"]%>
   numprocs = <%=num_procs || 1%>
-  process_name = %(program_name)s_%(process_num)
+  process_name = %(program_name)s_%(process_num)d
   redirect_stderr = true
-  stdout_logfile = /%(program_name)s_%(process_num)
+  stdout_logfile = log/%(program_name)s_%(process_num)d
 <% end %>
 
 <% template :scheduler do %>
