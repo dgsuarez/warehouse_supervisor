@@ -8,9 +8,9 @@ Gem::Specification.new do |gem|
   gem.version       = WarehouseSupervisor::VERSION
   gem.authors       = ["Diego Guerra"]
   gem.email         = ["diego.guerra.suarez@gmail.com"]
-  gem.description   = %q{Easily create supervisord configuration files}
+  gem.description   = %q{Easily create and run supervisord configuration files}
   gem.summary       = gem.description
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/dgsuarez/warehouse_supervisor"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
