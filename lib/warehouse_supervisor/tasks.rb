@@ -5,7 +5,7 @@ namespace :ws do
   def get_opts
     erb_file = ENV['TEMPLATES'] || raise("required TEMPLATES file")
     config_file = ENV['CONFIG']|| raise("required CONFIG file")
-    group = ENV['WS_GROUP'] 
+    group = ENV['WS_GROUP'] || raise("required configuration WS_GROUP")
     [erb_file, {:group => group, :config => config_file}]
   end
 

@@ -3,7 +3,7 @@ require 'warehouse_supervisor'
 
 module WarehouseSupervisor
   class WarehouseSupervisorCli < Thor
-    class_option :group, :aliases => :g, :default => "development"
+    class_option :group, :aliases => :g, :required => true
     class_option :config, :aliases => :c, :required => true
 
     desc "print file", "output the file acording to the config"
