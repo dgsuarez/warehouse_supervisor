@@ -47,8 +47,8 @@ This will start a supervisor instance running in the foreground with the config 
 Both these commands take the following options:
 
   * `--group | -g`, `WS_GROUP=` Group to use.
-  * `--config | -c`, `CONFIG` Definition file.
-  * ` `, `TEMPLATES` Templates file.
+  * `--config | -c`, `CONFIG=` Definition file.
+  * ` `, `TEMPLATES=` Templates file.
 
 ## Files
 
