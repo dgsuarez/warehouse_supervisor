@@ -21,6 +21,7 @@ module WarehouseSupervisor
           f.puts "[supervisord]"
           f.puts "nodaemon = true"
           f.puts "logfile = #{l.path}"
+          f.puts "loglevel = debug"
           f.write self.generate_contents
           f.flush
           command = "supervisord -c '#{f.path}'"
