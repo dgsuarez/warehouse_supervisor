@@ -18,25 +18,33 @@ Or install it yourself as:
 
 ## Usage
 
-There are 2 basic commands:
+Warehouse Supervisor may be used either from its own CLI interface or from rake, both provide the same commands:
 
 ### print
 
     warehouse_supervisor print -g production -c config.yml processes.conf.erb
+or
+    rake warehouse_supervisor:print WS_GROUP=production CONFIG=config.yml TEMPLATES=processes.conf.erb
     
-This will print your config file according to config.yml and processes.conf.erb
+This will print the programs in config.yml, using the templates in processes.conf.erb. 
+
+Note that only [program:x] sections are printed. The result of this command is intended to be redirected to a file to be
+[included in your main supervisord.conf file](http://supervisord.org/configuration.html#include-section-settings)
 
 ### start
 
     warehouse_supervisor start -g production -c config.yml processes.conf.erb
+or
+    rake warehouse_supervisor:start WS_GROUP=production CONFIG=config.yml TEMPLATES=processes.conf.erb
+
 
 This will start a supervisor instance running in the foreground with the config you specified
 
 Both these commands take the following options:
 
-  * --group | -g: Group to use
-  * --config | -c: Definition file
-  * --log-dir | -q (only in `start`): Log directory
+  * `--group | -g`, `WS_GROUP=` Group to use.
+  * `--config | -c`, `CONFIG` Definition file.
+  * ` `, `TEMPLATES` Templates file.
 
 ## Files
 
@@ -50,10 +58,10 @@ Warehouse Supervisor needs 2 files to work:
 This is an erb file where you'll define the different *program templates* that your app uses, for example:
 
     <% template :resque_web do %>
-    user = <%= user || ENV["USER"] %>
-    directory = <%=dir || ENV["RAILS_ROOT"]%>
-    command = bundle exec resque-web -F -L -p 5678 config/resque_config.rb 
-    environment = HOME='<%=home || ENV["HOME"]%>',USER=<%=user || ENV["USER"]%>
+      user = <%= user || ENV["USER"] %>
+      directory = <%=dir || ENV["RAILS_ROOT"]%>
+      command = bundle exec resque-web -F -L -p 5678 config/resque_config.rb 
+      environment = HOME='<%=home || ENV["HOME"]%>',USER=<%=user || ENV["USER"]%>
     <% end %>
 
 Each program template that you need will be define in a `template` block.
