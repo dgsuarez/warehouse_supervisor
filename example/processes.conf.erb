@@ -23,3 +23,11 @@
   environment = HOME='<%=home || ENV["HOME"]%>',USER=<%=user || ENV["USER"]%>, RAILS_ENV=<%=rails_env || ENV["RAILS_ENV"]%>, VERBOSE=1
 <% end %>
 
+<% template :ls do %>
+  user = <%= user || ENV["USER"] %>
+  directory = <%=dir || ENV["HOME"]%>
+  command = ls
+  environment = HOME='<%=home || ENV["HOME"]%>',USER=<%=user || ENV["USER"]%>
+  redirect_stderr = true
+<% end %>
+

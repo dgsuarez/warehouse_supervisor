@@ -29,4 +29,8 @@ production:
   resque_web:
     template: resque_web
 
+test:
+  ls:
+   template: ls
+
 
