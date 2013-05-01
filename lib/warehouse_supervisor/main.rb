@@ -17,16 +17,16 @@ module WarehouseSupervisor
 
     def start
       Tempfile.open("supervisord.conf") do |f|
-        f.puts "[supervisord]"
-        f.puts "logfile = #{File.join(log_dir, "supervisord.log")}"
-        f.puts "childlogdir = #{log_dir}"
-        f.puts "nodaemon = true"
-        f.write self.generate_contents
-        f.flush
-        FileUtils.mkdir_p(log_dir)
-        command = "supervisord -c '#{f.path}'"
-        puts command
-        exec command
+        Tempfile.open("supervisord.log") do |l|
+          f.puts "[supervisord]"
+          f.puts "nodaemon = true"
+          f.puts "logfile = #{l.path}"
+          f.write self.generate_contents
+          f.flush
+          command = "supervisord -c '#{f.path}'"
+          puts command
+          exec command
+        end
       end
     end
   end

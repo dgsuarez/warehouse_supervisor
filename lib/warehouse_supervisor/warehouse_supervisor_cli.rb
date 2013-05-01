@@ -12,7 +12,6 @@ module WarehouseSupervisor
     end
 
     desc "start file", "start an undemonized supervisor with file"
-    option :log_dir, :aliases => :q, :default => "log"
     def start(erb_file)
       WarehouseSupervisor::Main.new(erb_file, options).start
     end
