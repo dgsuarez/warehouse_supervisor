@@ -1,6 +1,6 @@
 require 'warehouse_supervisor'
 
-namespace :ws do
+namespace :warehouse_supervisor do
 
   def get_opts
     erb_file = ENV['TEMPLATES'] || raise("required TEMPLATES file")
