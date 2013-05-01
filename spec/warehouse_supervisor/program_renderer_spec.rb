@@ -1,5 +1,3 @@
-require 'rubygems'
-require 'bundler/setup'
 require 'yaml'
 require 'warehouse_supervisor/program_renderer'
 

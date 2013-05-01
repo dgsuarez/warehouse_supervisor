@@ -1,5 +1,5 @@
 #! /usr/bin/env ruby
 
-require 'lib/warehouse_supervisor/warehouse_supervisor_cli'
+require 'warehouse_supervisor/warehouse_supervisor_cli'
 
 WarehouseSupervisor::WarehouseSupervisorCli.start(ARGV)
