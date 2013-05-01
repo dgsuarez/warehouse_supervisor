@@ -23,7 +23,9 @@ Warehouse Supervisor may be used either from its own CLI interface or from rake,
 ### print
 
     warehouse_supervisor print -g production -c config.yml processes.conf.erb
+
 or
+
     rake warehouse_supervisor:print WS_GROUP=production CONFIG=config.yml TEMPLATES=processes.conf.erb
     
 This will print the programs in config.yml, using the templates in processes.conf.erb. 
@@ -34,7 +36,9 @@ Note that only [program:x] sections are printed. The result of this command is i
 ### start
 
     warehouse_supervisor start -g production -c config.yml processes.conf.erb
+
 or
+
     rake warehouse_supervisor:start WS_GROUP=production CONFIG=config.yml TEMPLATES=processes.conf.erb
 
 
