@@ -1,6 +1,9 @@
 module WarehouseSupervisor
 
   class TemplateBinding 
+
+    attr_reader :_output
+
     def initialize(program_name, hash)
       @program_name = program_name
       @template = hash["template"]
@@ -12,8 +15,9 @@ module WarehouseSupervisor
 
     def template(t)
       if @template == t.to_s
-        @output << "[program:#{@program_name}]"
+        @output = "[program:#{@program_name}]"
         yield
+        @_output = @output.dup
       end
     end
 

@@ -32,4 +32,17 @@ describe ProgramRenderer do
     pr = ProgramRenderer.new(definitions["development"], erb_content).render("resque_web")
     pr.should_not include "^\s+"
   end
+
+  it "should not print stuff outside of the template" do
+    erb_content =  %q{
+      I should not appear (upper)
+
+      <% template :tal do %>
+        awambabaluba
+      <% end %>
+
+      I should not appear (downer)
+    }
+    pr = ProgramRenderer.new({"cual" => {"template" => "tal"}}, erb_content).render("cual").should_not =~ /appear/
+  end
 end
