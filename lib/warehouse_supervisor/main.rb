@@ -10,7 +10,19 @@ module WarehouseSupervisor
     end
 
     def generate_contents
+      unless File.exist?(@options[:config])
+        STDERR.puts "Bad file '#{@options[:config]}'"
+        exit 1
+      end
+      unless File.exist?(@erb_file)
+        STDERR.puts "Bad file '#{@erb_file}'"
+        exit 1
+      end
       definitions = YAML.load(File.read(@options[:config]))[@options[:group].to_s]
+      unless definitions
+        STDERR.puts "Bad group '#{@options[:group]}'"
+        exit 1
+      end
       erb_content = File.read(@erb_file)
       Renderer.new(definitions, erb_content).render
     end
